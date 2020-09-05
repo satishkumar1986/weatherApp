@@ -1,0 +1,67 @@
+<div class="container py-5">
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Type City</h5>
+                    <form [formGroup]="searchForm" (ngSubmit)="searchFormSubmit()">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <input type="text" class="form-control" placeholder="Type City" formControlName="city">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-primary" [disabled]="searchForm.invalid">See Weather</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Select City</h5>
+                    <form [formGroup]="selectForm" (ngSubmit)="selectFormSubmit()">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <select class="form-control" formControlName="selectCity">
+                                    <option value="" disabled selected hidden>Select City</option>
+                                    <option *ngFor="let data of cityFilterArray" [value]="data">{{data}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-primary" [disabled]="selectForm.invalid">See Weather</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-5">
+        <div class="col-12" *ngIf="weatherDetail">
+            <div class="card" style="width: 18rem;">                
+                <div class="card-body">
+                    <h5 class="card-title">{{weatherDetail.name}} <span class="badge badge-secondary">{{weatherDetail.sys.country}}</span></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Temp - {{weatherDetail.main.temp - 273.15 | number: '2.0-0'}} <span class="badge badge-secondary">C</span></li>
+                    <li class="list-group-item">Weather - {{weatherDetail.weather[0].main}}</li>
+                    <li class="list-group-item">Wind - {{weatherDetail.wind.speed}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
